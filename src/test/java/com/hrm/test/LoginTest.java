@@ -1,34 +1,43 @@
 package com.hrm.test;
 
+import java.io.IOException;
+import java.time.Duration;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import com.hrm.pages.GetExelData;
 import com.hrm.pages.LoginPage;
+
+
 
 
 public class LoginTest {
 	
 	LoginPage lp;
+	GetExelData gd;
+	WebDriver driver;
 	
-	
-	@BeforeClass
-	public void initialization()
-	{
-		lp=new LoginPage();
-		lp.initialization();
-	}
-	
+
 	@Test
-	public void loginTest() throws InterruptedException
-	{
-		lp.loginPage();
+	public void validateLogin() throws IOException {
+		gd=new GetExelData();
+		gd.getData();
 	}
+
 	@Test
 	public void adminSearchTest() throws InterruptedException {
 		lp.adminSearch();
@@ -83,7 +92,7 @@ public class LoginTest {
 	}
 	
 	
-	@AfterClass
+	@AfterSuite
 	public void closeBrowser()
 	{
 		lp.tearDown();

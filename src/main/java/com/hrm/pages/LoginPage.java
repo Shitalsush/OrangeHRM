@@ -10,6 +10,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,24 +22,40 @@ public class LoginPage {
 	
 	public void initialization()
 	{
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		ChromeOptions options=new ChromeOptions();    
+		options.addArguments("--remote-allow-origins=*");    
+		driver=new ChromeDriver(options);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(20));
 		driver.get("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
+		
 		driver.manage().window().maximize();
 	}
 		public void loginPage() throws InterruptedException {
-		//	driver = new ChromeDriver();
 			driver.findElement(By.name("username")).sendKeys("Admin");
 			driver.findElement(By.name("password")).sendKeys("admin123");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div/div[1]/div/div[2]/div[2]/form/div[3]/button")).click();
-//			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]")).click();
-//		Thread.sleep(3000);
+
 		}
-		public void adminSearch() throws InterruptedException {
+		public void adminSearch()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]")).click();
-     		Thread.sleep(3000);
+     		try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			WebElement userName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[1]/div/div[2]/input"));
 			WebElement uRole = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[2]/div/div[2]/div/div"));
 			WebElement empName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[1]/div/div[3]/div/div[2]/div/div/input"));
@@ -64,11 +81,19 @@ public class LoginPage {
 			
 		}
 		
-		public void addFuction() throws InterruptedException {
+		public void addFuction()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]")).click();
-     		Thread.sleep(3000);
+     		try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 			Actions act = new Actions(driver);
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[1]/button")).click();
 		WebElement uRole =	driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[1]/div/div[2]/div/div/div[1]"));
@@ -86,17 +111,32 @@ public class LoginPage {
 		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/button[2]")).click();
 		}
 		
-		public void addSkill() throws InterruptedException {
+		public void addSkill()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+			
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[1]")).click();
-     		Thread.sleep(3000);
+     		try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			Actions act = new Actions(driver);
 		WebElement qualification =	driver.findElement(By.xpath("//span[text()='Qualifications ']"));
 		qualification.click();
-		Thread.sleep(2000);
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 		act.sendKeys(qualification, Keys.ARROW_DOWN).click().build().perform();
-		//Thread.sleep(2000);
+		
 		
 		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/div[1]/div/button")).click();
 		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div[2]/input")).sendKeys("Java Skill");
@@ -104,81 +144,142 @@ public class LoginPage {
 		driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/button[2]")).click();
 		}
 		
-		public void pIMFunction() throws InterruptedException {
+		public void pIMFunction()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")).click();
-			Thread.sleep(3000);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			
-			//Scrolling by some pixels
+			
 			js.executeScript("window.scrollBy(0,1000)");
 			System.out.println(driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[2]/div[3]/div/div/div[1]/div/div/div[1]/div[2]/div/div/button[2]/i")).isEnabled());
 		}
 		
-		public void createLoginDetails() throws InterruptedException {
+		public void createLoginDetails()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")).click();
-			Thread.sleep(3000);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
-			Thread.sleep(3000);
-			//Scrolling by some pixels
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
 			js.executeScript("window.scrollBy(0,1000)");
 			System.out.println(driver.findElement(By.xpath("//span[@class='oxd-switch-input oxd-switch-input--active --label-right']")).isDisplayed());
 		}
 		
-		public String validationOfForm() throws InterruptedException {
+		public String validationOfForm()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")).click();
-			Thread.sleep(3000);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
-			Thread.sleep(3000);
-			//Scrolling by some pixels
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
 			js.executeScript("window.scrollBy(0,1000)");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[2]/div/label/span")).click();
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[2]/button[2]")).click();
-			
-//			List<WebElement> errorMsg = driver.findElements(By.xpath("//span[text()='Required']"));
-//			for(WebElement actError:errorMsg) {
-//				
-//				System.out.println(actError);
-//				
-//			}
-//			
 		String actError =	driver.findElement(By.xpath("//span[text()='Required']")).getText();
 		return actError;
-		
-			
+	
 		}
 		
-		public String verifyCancleBtn() throws InterruptedException {
+		public String verifyCancleBtn()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")).click();
-			Thread.sleep(3000);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
-			Thread.sleep(3000);
-			//Scrolling by some pixels
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
 			js.executeScript("window.scrollBy(0,1000)");
 			driver.findElement(By.xpath("//button[text()=' Cancel ']")).click();
 		String actMsg =	driver.findElement(By.xpath("//h5[text()='Employee Information']")).getText();
 			return actMsg;
 		}
 		
-		public void verifyPasswordField() throws InterruptedException {
+		public void verifyPasswordField()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+			
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[1]/aside/nav/div[2]/ul/li[2]/a")).click();
-			Thread.sleep(3000);
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			JavascriptExecutor js = (JavascriptExecutor)driver;
 			driver.findElement(By.xpath("//a[text()='Add Employee']")).click();
-			Thread.sleep(3000);
-			//Scrolling by some pixels
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+			
 			js.executeScript("window.scrollBy(0,1000)");
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[2]/div/label/span")).click();
 		WebElement pwd =	driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div[2]/div[4]/div/div[1]/div/div[2]/input"));
@@ -195,21 +296,31 @@ public class LoginPage {
 		
 		}
 		
-		public void displayEmpName() throws InterruptedException {
+		public void displayEmpName()  {
 			initialization();
-			loginPage();
+			try {
+				loginPage();
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
 			driver.findElement(By.xpath("//span[text()='Leave']")).click();
 			
 		WebElement empName =driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div[1]/div[2]/form/div[2]/div/div[1]/div/div[2]/div/div/input"));
 		empName.sendKeys("P");
-		Thread.sleep(3000);
+		try {
+			Thread.sleep(3000);
+		} catch (InterruptedException e) {
+			
+			e.printStackTrace();
+		}
 		Actions act = new Actions(driver);
 		act.sendKeys(empName, Keys.ARROW_DOWN.ENTER).build().perform();
 		
 		
 		}
 		
-		public void assignLeave() throws InterruptedException {
+		public void assignLeave()  {
 			WebElement empName = driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[1]/div/div/div/div[2]/div/div/input"));
 			empName.sendKeys("P");
 			Actions act = new Actions(driver);
@@ -217,9 +328,13 @@ public class LoginPage {
 			
 			driver.findElement(By.xpath("//div[text()='US - Personal']")).click();
 			driver.findElement(By.xpath("//*[@id=\"app\"]/div[1]/div[2]/div[2]/div/div/form/div[3]/div/div[1]/div/div[2]/div/div/i")).click();
-			Thread.sleep(3000);
-			
-		
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				
+				e.printStackTrace();
+			}
+	
 		}
 		
 		public void tearDown()
